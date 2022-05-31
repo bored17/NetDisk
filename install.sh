@@ -1,27 +1,52 @@
-groupadd mysql
-useradd -r -g mysql -s /bin/false mysql
-cd /usr/local
-if  [ ! -f  "/usr/local/mysql-8.0.29-linux-glibc2.12-x86_64.tar.xz"  ]; then
-wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.29-linux-glibc2.12-x86_64.tar.xz
+#!/bin/bash
+
+# 下载资源
+
+
+myPath=$(whiptail --title " Input Box" --inputbox "input installion Location" 10 60 /opt 3>&1 1>&2 2>&3)
+
+exitstatus=$?
+
+if [ $exitstatus = 0 ]; then
+    echo "Your name is:" $myPath
 else
-echo  "tar.xz already exit"
+    echo "You chose Cancel."
 fi
 
-tar -xf mysql-8.0.29-linux-glibc2.12-x86_64.tar.xz
+kafkaVersion=fasdf.12
+flumeVersion=
+flinkVersion=
+sparkVersion=
+esVersion=
+mysqlVersion=
+pgsqlVersion=
+#!/bin/bash
+OPTIONS=$(whiptail --title "Checklist Dialog" --checklist \
+"Choose software to install" 15 60 8 \
+"kafka" "${kafkaVersion}" ON \
+"flume" "Popular Ubuntu" OFF \
+"flink" "Stable CentOS" ON \
+"spark" "Stable CentOS" ON \
+"elasticsearch" "Stable CentOS" ON \
+"mysql" "Stable CentOS" ON \
+"postgresql" "Rising Star Mint" OFF 3>&1 1>&2 2>&3)
 
-if  [ ! -f  "/usr/local/mysql"  ]; then
-ln -s mysql-8.0.29-linux-glibc2.12-x86_64  mysql
+exitstatus=$?
+if [ $exitstatus = 0 ]; then
+    echo "Your favorite distros are:" $OPTIONS
 else
-rm -rf /usr/local/mysql
-ln -s mysql-8.0.29-linux-glibc2.12-x86_64  mysql
+    echo "You chose Cancel."
 fi
 
-cd mysql
-mkdir mysql-files
-chown mysql:mysql mysql-files
-chmod 750 mysql-files
-bin/mysqld --initialize --user=mysql
-bin/mysql_ssl_rsa_setup
-bin/mysqld_safe --user=mysql &
-# Next command is optional
-cp support-files/mysql.server /etc/init.d/mysql.server
+for i in $OPTIONS
+do
+    if [ -f $i ]; then 
+    echo $i
+    mv $i $myPath
+    cd $myPath
+    tar xfvz $i
+    cd -
+    else 
+    echo "no such file: $i"
+    fi
+done
