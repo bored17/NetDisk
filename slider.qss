@@ -1,0 +1,30 @@
+/* 自定义滑条样式 */
+QSlider::groove:horizontal {
+    border: 1px solid #999999;
+    background: #DDDDDD;
+    height: 10px;
+    margin: 0px;
+}
+
+QSlider::handle:horizontal {
+    background: qlineargradient(x1:0, y1:0, x2:1, y2:1,
+        stop:0 #45A1FF, stop:1 #0078D4);
+    border: 1px solid #0078D4;
+    width: 20px;
+    margin: -5px 0;
+    border-radius: 5px;
+}
+
+QSlider::sub-page:horizontal {
+    background: #45A1FF;
+    border: 1px solid #0078D4;
+    height: 10px;
+    border-radius: 5px;
+}
+
+QSlider::add-page:horizontal {
+    background: #DDDDDD;
+    border: 1px solid #999999;
+    height: 10px;
+    border-radius: 5px;
+}
