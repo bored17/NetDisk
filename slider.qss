@@ -28,3 +28,10 @@ QSlider::add-page:horizontal {
     height: 10px;
     border-radius: 5px;
 }
+#在上面的QSS中，我们为水平方向的QSlider定义了几个不同的部分的样式：
+
+#QSlider::groove:horizontal：定义了滑条轨道的样式，包括边框、背景颜色和高度。
+#QSlider::handle:horizontal：定义了滑块（拇指）的样式，包括背景渐变色、边框、宽度和边距。
+#QSlider::sub-page:horizontal：定义了滑块左侧的样式，即已选择的部分。
+#QSlider::add-page:horizontal：定义了滑块右侧的样式，即未选择的部分。
+#你可以根据自己的需求自定义这些样式，并将上述QSS代码应用到你的自定义滑条组件上，以实现自定义的滑条样式。你可以使用 setStyleSheet 方法将QSS代码应用到QWidget或QSlider上，例如：
